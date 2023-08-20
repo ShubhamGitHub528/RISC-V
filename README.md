@@ -1,6 +1,6 @@
 # RISC-V
 
-## Day 1: Introduction to RISC-V and GNU compiler toolchain
+### Day 1: Introduction to RISC-V and GNU compiler toolchain
 
 <details>
 <summary>Introduction to RISC-V Basic keywords</summary>
@@ -90,7 +90,7 @@ spike -d pk sum1ton.o
   
 </details>
 
-## Day 2: Introduction to ABI and Basic verification flow
+### Day 2: Introduction to ABI and Basic verification flow
 
 <details>
 <summary>Application Binary Interface</summary>
@@ -147,5 +147,77 @@ In a 32-bit architecture, registers are data storage locations within the proces
   ![Screenshot from 2023-08-19 19-28-07](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/2790530c-a99b-40bc-8f72-86e7945851dd)
 
 </br>
+
+</details>
+
+### Day 3: Digital Logic with TL-Verilog and Makerchip.
+
+<details>
+<summary> Combinational Logic </summary>
+</br>
+ 
+**Logic Gates**
+Logic gates are fundamental building blocks of digital circuits and are used to perform logical operations on binary inputs (0s and 1s). These gates are the foundation of digital computing and are used to create more complex functions and operations. There are several types of logic gates, each with its own specific behavior. 
+
+**Inverter**
+![Screenshot from 2023-08-20 17-34-36](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/7209b8b6-b3d2-41bd-bad0-32554ff02585)
+
+**And**
+![Screenshot from 2023-08-20 17-41-01](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/f040b28f-2f2f-40cc-adac-92af2a936ea0)
+
+
+**Vector**
+![Screenshot from 2023-08-20 17-52-58](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/b03ed31c-73e1-4048-b558-bb167e2f0759)
+
+**Mux**
+![Screenshot from 2023-08-20 18-03-47](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/15692be1-9b93-4691-8355-b82efadc3987)
+![Screenshot from 2023-08-20 18-03-54](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/af31a238-22cd-4e0b-ad49-23722c754b01)
+
+**Combinational Calculator**
+
+![Screenshot from 2023-08-20 18-05-37](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/7a871711-f1f1-47a1-9617-db3991c9a8b6)
+![Screenshot from 2023-08-20 19-36-17](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/e3401130-31ce-4fc2-a936-ec1f03ccc68e)
+
+</details>
+
+<details>
+<summary> Sequential Logic </summary>
+</br>
+ 
+**Febonacci Series**
+![Screenshot from 2023-08-20 19-50-16](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/5ddc138d-8a63-4453-946a-95f0d6690bec)
+![Screenshot from 2023-08-20 19-54-06](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/ad16a09a-f407-4b06-a208-aff9e8c79901)
+
+**Counter**
+![Screenshot from 2023-08-20 19-56-53](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/63043ce7-f884-473a-a698-b465f801a06d)
+
+**Sequential Calculator**
+![Screenshot from 2023-08-20 20-03-52](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/f7bb1080-415b-4f38-b2d5-4acb0096cc8b)
+![Screenshot from 2023-08-20 21-27-29](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/b6427f4f-d8b2-44fd-befe-0af471bf4187)
+
+
+</details>
+
+<details>
+<summary> Pipelined Logic </summary>
+</br>
+ 
+**Error Conditions within Computation Pipeline**
+
+![Screenshot from 2023-08-20 22-32-26](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/4605a30a-731f-436f-b39b-429bbb720520)
+
+**Counter & Calculator**
+![Screenshot from 2023-08-20 22-48-14](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/9003ee00-d348-4f41-8449-0760b72ca39e)
+
+**2-Cycle Calculator**
+![Screenshot from 2023-08-20 23-14-54](https://github.com/ShubhamGitHub528/RISC-V/assets/140998623/30253c93-6270-49ca-a32d-ff4a1811b96b)
+
+
+</details>
+
+<details>
+<summary> Validity </summary>
+</br>
+
 
 </details>
