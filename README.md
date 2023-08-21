@@ -338,11 +338,14 @@ These components work together to execute machine instructions in a CPU. The pro
 \SV
    endmodule
 ```
-**PC Logic**
+
+**L1 - Implementation Plan and Lab for PC**
+![Screenshot from 2023-08-22 00-08-19](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/30fc43ad-fd1d-4065-b113-72b537a5659f)
 ![Screenshot from 2023-08-21 14-40-41](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/79905e9b-cb1e-447f-ba69-000124897741)
 ![Screenshot from 2023-08-21 14-53-00](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/1809b4c3-40e5-40a4-94ab-790d4d914fec)
+**L2 - Lab for instruction fetch logic**
 
-**Fetch**
+![Screenshot from 2023-08-22 00-08-43](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/33f1492f-eab8-4466-9f39-f4f9b94282b5)
 Fetch Block diagram 
 ![Screenshot from 2023-08-21 20-40-39](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/adf9ffaf-9cf4-4e2d-818e-8768b8a4e095)
 Output:
@@ -355,7 +358,118 @@ Via
 #### Decoder:
 
 
+**L3 - Lab for RV instruction types IRSBJU Decode Logic**
+![Screenshot from 2023-08-22 00-08-59](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/fb163a32-b6c3-4a9f-b91a-101897ab04dd)
+
+![Screenshot from 2023-08-22 00-32-15](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/d511836e-7303-4631-87b4-7a7edc0a0fe5)
+
+**L4 - Lab for instruction immediate decode logic for RV ISBUJ**
+![Screenshot from 2023-08-22 00-09-30](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/d0b74a04-0bbf-4ea3-b9d2-a7bf481ae355)
+
+![Screenshot from 2023-08-22 00-32-36](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/ae74fa9f-427a-477f-a644-0315a40ad34b)
+
+**L5 - Lab to decode other fields of Instruction of RV ISBUJ**
+![Screenshot from 2023-08-22 00-09-50](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/384cb428-bbd2-4545-be52-f1cb304a33d5)
+![Screenshot from 2023-08-22 00-32-47](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/f3fdf5bf-712d-4a92-aa12-f6d4da105f25)
+
+**L6 - Lab to decode instruction fields based on Instruction type RV ISBUJ**
+![Screenshot from 2023-08-22 00-10-00](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/396c3e8d-c9cb-455a-a375-9f1363e62882)
+
+![Screenshot from 2023-08-22 00-32-57](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/60b71e9e-1762-4e06-a71b-a0d683328b58)
+
+**L7 - Lab to decode individual Instruction**
+![Screenshot from 2023-08-22 00-10-20](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/3369c564-87fe-4245-ba98-964663e552c8)
+![Screenshot from 2023-08-22 00-33-09](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/9ac0557c-00ca-4008-82c4-0ed8e1b37734)
 
 
 
 </details>
+
+
+<details>
+  <summary>
+    RV-D4SK3 - RISCV Control Logic 
+  </summary>
+
+**L1 - Lab for Register file read -1**
+![Screenshot from 2023-08-22 00-10-55](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/7a2c38f6-20e7-40a7-8269-2d03ce1570bc)
+![Screenshot from 2023-08-22 00-38-33](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/2bce4ba2-d585-42ca-804d-0d67857ef05c)
+
+**Lab for Register file read -2**
+![Screenshot from 2023-08-22 00-11-16](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/6d5282fb-1da5-47c3-b557-72c0189743a3)
+
+![Screenshot from 2023-08-22 00-38-49](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/267fffcb-4a75-4be4-bd0b-4c7bffd9d9d2)
+
+**L3 - Lab for ALU operations**
+![Screenshot from 2023-08-22 00-11-32](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/d63685bd-59ec-4e93-bd63-f7bc46a86ffe)
+
+![Screenshot from 2023-08-22 00-39-01](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/1cd88720-24ce-442b-9b91-7f7039f0576f)
+
+**L4 - Lab for Register file write** 
+![Screenshot from 2023-08-22 00-11-38](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/59f67eda-e77d-4de6-8524-8879d81db90a)
+![Screenshot from 2023-08-22 00-39-16](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/8700881e-8b34-4e46-921f-a5fb3b57d540)
+
+**L5 - Concept of array and Rgister file details**
+![Screenshot from 2023-08-22 00-11-48](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/424d6240-c7c5-4332-801d-0d4348e27387)
+
+![Screenshot from 2023-08-22 00-39-47](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/126ca197-6f8e-457e-8a93-bc395b3b744e)
+
+**L6 - Lab for implementing branch Instructions**
+![Screenshot from 2023-08-22 00-12-08](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/b14cfcd4-5d3a-4be6-b931-16579ebc7310)
+
+
+**L7 - Lab fpr completing branch instructions implementations**
+![Screenshot from 2023-08-22 00-12-19](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/c1475b36-02e7-4ced-871d-9ac51cff15a6)
+![Screenshot from 2023-08-22 00-40-16](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/2845cc10-0808-4351-bca8-03d80daabfda)
+
+**L8 - Lab to create simple testbench**
+![Screenshot from 2023-08-22 00-12-31](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/e4b9243d-dfda-4cd4-b898-02ee75d4cb96)
+
+![Screenshot from 2023-08-22 00-42-41](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/1820b072-7fe8-4cef-9399-57d09542b0d3)
+
+
+</details>
+
+
+## DAY-5 Complete Pipelined RISCV CPU Microarchitecture
+
+
+
+<details>
+  <summary>
+    RV-D5SK1 - Pipelining the CPU  
+  </summary>
+
+  ## RV-D5SK1 - L1 - Introduction to control flow hazard and read after write hazard
+  ## RV-D5SK1 - L2 - Create 3 cycle valid signal
+  ## RV-D5SK1 - L3 - Code 3 cycle RISCV architecture to take care of invalid signal
+  ## RV-D5SK1 - L4 - To modify 3 cycle RISCV to distribute logic 
+
+</details>
+
+
+<details>
+  <summary>
+    RV-D5SK2 - Solution to Pipeline Hazard
+  </summary>
+
+
+## RV-D5SK2 - L1 - Register File Bypass to address RD after WR hazard
+## RV-D5SK2 - L2 - Braches to correct branch target path
+## RV-D5SK2 - L3 - Complete instuction decode 
+## RV-D5SK2 - L4 - Code complete ALU
+</details>
+
+<details>
+  <summary>
+    RV-D5SK3 - Load Store Instruction and completing RISCV CPU
+  </summary>
+
+## RV-D5SK3 - L1 - Introduction and Lab to redirect load
+## RV-D5SK3 - L2 - Load data from Memory to Rgister file
+## RV-D5SK3 - L3 - Add loads and stores to test program
+## RV-D5SK3 - L4 - Add control logic for JUMP instructions
+## RV-D5SK3 - L5 - Wrap up 
+
+
+
