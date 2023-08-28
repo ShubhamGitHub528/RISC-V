@@ -431,98 +431,173 @@ Via
 </details>
 
 
-## DAY 5 - If, case, for loop and for generate
-
+ 
+### Day 5: Complete Pipelined RISC-V CPU Micro-Architecture
 
 <details>
+	
+<summary> Pipelining the CPU</summary>
 
-<summary><strong>If Case Constructs</strong></summary>
+Under this section, we will look into pipelining and its benefits, and pipeline the RISC-V CPU design. We will go over the possible hazards and how to work around to avoid hazards.
 
-Under this section, we will look into if and case statements for verilog coding. These statements are always given under an **always** block. Thus the output is always a reg type. 
+First of all it is important to understand pipelining. It streamlines the process of retiming and considerably reducing the occurrence of functional errors. This technique enables faster computational tasks. We have listed the various benefits of pipelining as follows 
 
-***If-else condotions*** are known as priority logic statments.
+- Increased throughput
+- Reduced latency
+- Better resource utilization
+- Improved parallelism
+- Smoother performance
+- Scalability
+- Faster clock speeds
+- Reduced dependencies
+- Flexibility
+- Efficient resource sharing
 
-- General syntax for if-else condtions
+
+As previously explained, establishing the pipeline is a straightforward process of incorporating stages labelled as @1, @2, and so on. A visual representation of the pipelining setup is provided below. In TL Verilog, it's important to note that there is no strict requirement to define the pipeline stages in a specific systematic order, providing an extra layer of benefit.
+
+The hazards that can arise in pipelining a design are listed as 
+
+1. Control flow hazard
+2. Read after Write hazard
+
+Now, first we will look into how to pipeline the system, then will tackle the incoming hazards.
+
+**Creating 3-Cycle Valid Signal**
+- We make a start pulse to reset the previous cycle
+- The we make a 3 cycle loop of valid pulses.
+
+- Schematic Diagram for the design
+
+![Screenshot from 2023-08-28 08-35-02](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/286c20bd-2113-45e6-b6da-314a94830e68)
+
+- Code for Makerchip IDE implementation.
 ```bash
-if(Condition 1)
-	<Statement 1>
-else if(Condition 2)
-	<Statement 2>
-else if(Condition 3)
-	<Statement 3>
-else
-	<Statement 4>
-end
-```
-- It can be inferred that, when the condition 1 is valid, statement 1 is of the highest priority, and the rest of the condtions aren't checked for.
-- Similarly, we check for which condtion falls true. In case none do, the else block statements takes highest priority.
-- The if-else statements can be designed using muxs as shown-->
+	$valid = $reset ? 1'b0 : ($start) ? 1'b1 : (>>3$valid) ;
+	$start_int = $reset ? 1'b0 : 1'b1;
+	$start = $reset ? 1'b0 : ($start_int && !>>1$start_int);
 
-![if1](https://github.com/Shant1R/Shant_IIITB/assets/59409568/faa370f8-a116-4237-8ad5-00bc1e5b0f97)
+``` 
 
-**Cautions while using if-else**
-- In case we miss the else block, it can cause an inferred latch.
-- It is a latch that wasn't intended in the design.
+**Invalid Cycles Adjustments**
 
-![if2](https://github.com/Shant1R/Shant_IIITB/assets/59409568/3b103d4f-d2c5-48cb-b701-0ed93d7cbec3)
+- Once we have created a 3 cycles with valid cycles, we get cycles in which there are non valid cycles.
+- We have to make sure invalid instruction does write in the register files and PC.
+- Schematic to be implemented
+![Screenshot from 2023-08-28 08-35-13](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/9dcf434b-90cb-4b15-89d5-4c09748e4cb9)
 
-- **Note** --> We can use this as a design advantage in cartain cases, such as a **counter** design, where we have an inferred latch to store the previous counts.
-
-![if3](https://github.com/Shant1R/Shant_IIITB/assets/59409568/6ad9ca43-67eb-4b3d-b43b-327d5b0aabaf)
-
-***Case Statement***
-
-- Case statement looks for equality for the select line variable.
-- RTL syntax
-```bash
- always @(*)
- begin
-   case(sel)
-     2'b00: begin
-	    ------
-	    ------
-	    end
-     2'b01: begin
-            ------
-     	    ------	
-	    end
-     default:
-   endcase
- end
-```
-- In the syntax above we have taken a 2 bit select variable, thus there are 4 cases to be determined.
-- In case we dont address all four cases, the remaining two cases will form a latch with the previous output.
-- In order to avoid these inferred lateches, it is practiced to always have a default block.
-
-![case1](https://github.com/Shant1R/Shant_IIITB/assets/59409568/df44cbf2-60cf-4b2e-83b4-e9a8d75f8544)
-
-- Another point to take note of --> avoid partial assignments, else this might cause inferred latch formations.
-- Example to show the condtion of partial assignments.
+- TLverilog code for implementation on Makerchip IDE.
 
 ```bash
-reg [1:0] sel;
-always @(*)
- begin
-   case(sel)
-     2'b00: begin
-             x=a;
-             y=b;
-            end
-     2'b01: begin
-             x=c;
-            end 
-     default: begin
-               x=d;
-               y=b;
-             end
-   endcase
-  end
+// introducing valid_taken_br
+$valid_taken_br = $valid && $taken_branch;
+
+// updating the PC
+$pc[31:0] = >>1$reset ? 32'b0 : (>>1$valid_taken_br)? (>>1$br_target_pc) : (>>1$pc + 32'd4);
+         
 ```
-- The hardware design for the given RTL file.
 
- ![case2](https://github.com/Shant1R/Shant_IIITB/assets/59409568/d9e110da-5117-43f1-9451-c8eaf04583fb)
+**Logic Distribution into 3-Cycles**
+- Under this step we look into how to update the design to execute the logic into 3 cycles.
+- Schematic for distribution
+  ![Screenshot from 2023-08-28 08-35-23](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/7404537e-e39b-427a-9e42-f1dd3
+- **Implementation of 3-Cycle Pipeline over MakerChip IDE.**
+![Screenshot from 2023-08-28 08-35-44](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/f96748b1-2b4f-416a-b3a0-d1b90054b037)
 
-- To avoid this it is important we assign all the variables in all the given cases and default case and also avoid overlapping cases.
+
+</details>
+
+<details>
+	
+<summary>Solutions to Pipelining Hazards</summary>
+
+We will look into how to get past the pipeline hazards.
+
+- One such hazards, is ***read after write hazard***.
+
+
+- Code introduced to the CPU for the tackle
+
+```bash
+	$src1_value[31:0] = ((>>1$rf_wr_en) && (>>1$rd == $rs1 )) ? (>>1$result): $rf_rd_data1; 
+	$src2_value[31:0] = ((>>1$rf_wr_en) && (>>1$rd == $rs2 )) ? (>>1$result) : $rf_rd_data2;
+```
+
+- Now, we look into how to rectify the branch paths in the CPU core developed.
+- Scehmatic to rectify the brancg path followed
+![Screenshot from 2023-08-28 08-36-05](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/3c8a7093-93df-4601-92a3-d835f1ebcbe7)
+
+
+- Code Introduced
+```bash
+ 	$pc[31:0] = (>>1$reset) ? 32'b0 : (>>3$valid_taken_br) ? (>>3$br_tgt_pc) :  (>>3$int_pc)  ;
+
+
+	// we will comment off the valid line
+	//$valid = $reset ? 1'b0 : ($start) ? 1'b1 : (>>3$valid) ; 
+```
+
+- Now, we will decode the remaining ***RV32I Base Instruction Set***. Can refer this page for a detailed discription --> [LINK](https://msyksphinz-self.github.io/riscv-isadoc/html/rvi.html)
+- Once we complete the decoding, we finish the ALU logic for the decode instruction set.
+- Complete implementation on Makerchip IDE.
+![Screenshot from 2023-08-28 08-36-16](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/3f9402bf-91d2-49f7-83a9-e79da06f19f7)
+
 
  
 </details>
+
+<details>
+	
+<summary>Load/Store Instructions and Completing the CPU</summary>
+
+Under this section, we will look into how to add the load and store data from register files and test program, followed by instantiation of the data memory unit. Towards the end we will look into how to generate branch control logic for the jump statements.
+
+- Schematic for how to redirect the load.
+![Screenshot from 2023-08-28 08-36-26](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/93184a1b-8e28-43a4-ba63-e3f6d6b94173)
+
+
+
+- Now, we look into the schematic flow to load data and implement this on makerchip.
+ ![Screenshot from 2023-08-28 08-36-32](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/918dd137-9ea0-4702-936a-9b9a2d7fa619)
+
+
+- Now we begin with creating the data memory.
+- The block diagram for the memory structure, representing the inputs and outputs for the memory block are as follows.
+![Screenshot from 2023-08-28 08-36-46](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/d0e2ec9e-edb6-4ae6-96ad-3ac66583d4d4)
+
+
+- After the memory is instantiated, we try to load and store using different register and have a hands-on practice.
+
+- The final being is the integration of control for branching of jump statements.
+
+- The scehmatic diagram showing the implemetation of jump statement logic
+![Screenshot from 2023-08-28 08-36-53](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/41099069-54e6-41a8-a85b-b912e7409461)
+
+
+***Final Implementaion on Makerchip IDE***
+![Screenshot from 2023-08-28 08-37-06](https://github.com/ShubhamGitHub528/ASIC/assets/140998623/e32f9e8c-f2c3-4a33-b0b7-a689512f786e)
+
+
+***Diagram Generated along with the waveform and visualisation***
+![Screenshot from 2023-08-24 12-04-32](https://github.com/Shant1R/RISC-V/assets/59409568/c4a5d9ff-36ec-46c5-a3e1-8c0a969b47c5)
+
+
+ 
+</details>
+
+## Acknowledgements
+- [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
+- [Steve Hoover](https://github.com/stevehoover), Founder, Redwood EDA
+- Shant Rakshit
+- Alwin Shaju
+
+  
+## References
+- https://github.com/kunalg123
+- https://github.com/stevehoover/RISC-V_MYTH_Workshop
+- https://www.vsdiat.com/
+- https://redwoodeda.com/
+- https://makerchip.com/
+- [https://riscv.org/](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf)
+- https://inst.eecs.berkeley.edu/
+- https://github.com/riscv/riscv-gnu-toolchain
