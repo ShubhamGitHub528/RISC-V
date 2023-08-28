@@ -431,45 +431,98 @@ Via
 </details>
 
 
-## DAY-5 Complete Pipelined RISCV CPU Microarchitecture
-
+## DAY 5 - If, case, for loop and for generate
 
 
 <details>
-  <summary>
-    RV-D5SK1 - Pipelining the CPU  
-  </summary>
 
-  ## RV-D5SK1 - L1 - Introduction to control flow hazard and read after write hazard
-  ## RV-D5SK1 - L2 - Create 3 cycle valid signal
-  ## RV-D5SK1 - L3 - Code 3 cycle RISCV architecture to take care of invalid signal
-  ## RV-D5SK1 - L4 - To modify 3 cycle RISCV to distribute logic 
+<summary><strong>If Case Constructs</strong></summary>
 
+Under this section, we will look into if and case statements for verilog coding. These statements are always given under an **always** block. Thus the output is always a reg type. 
+
+***If-else condotions*** are known as priority logic statments.
+
+- General syntax for if-else condtions
+```bash
+if(Condition 1)
+	<Statement 1>
+else if(Condition 2)
+	<Statement 2>
+else if(Condition 3)
+	<Statement 3>
+else
+	<Statement 4>
+end
+```
+- It can be inferred that, when the condition 1 is valid, statement 1 is of the highest priority, and the rest of the condtions aren't checked for.
+- Similarly, we check for which condtion falls true. In case none do, the else block statements takes highest priority.
+- The if-else statements can be designed using muxs as shown-->
+
+![if1](https://github.com/Shant1R/Shant_IIITB/assets/59409568/faa370f8-a116-4237-8ad5-00bc1e5b0f97)
+
+**Cautions while using if-else**
+- In case we miss the else block, it can cause an inferred latch.
+- It is a latch that wasn't intended in the design.
+
+![if2](https://github.com/Shant1R/Shant_IIITB/assets/59409568/3b103d4f-d2c5-48cb-b701-0ed93d7cbec3)
+
+- **Note** --> We can use this as a design advantage in cartain cases, such as a **counter** design, where we have an inferred latch to store the previous counts.
+
+![if3](https://github.com/Shant1R/Shant_IIITB/assets/59409568/6ad9ca43-67eb-4b3d-b43b-327d5b0aabaf)
+
+***Case Statement***
+
+- Case statement looks for equality for the select line variable.
+- RTL syntax
+```bash
+ always @(*)
+ begin
+   case(sel)
+     2'b00: begin
+	    ------
+	    ------
+	    end
+     2'b01: begin
+            ------
+     	    ------	
+	    end
+     default:
+   endcase
+ end
+```
+- In the syntax above we have taken a 2 bit select variable, thus there are 4 cases to be determined.
+- In case we dont address all four cases, the remaining two cases will form a latch with the previous output.
+- In order to avoid these inferred lateches, it is practiced to always have a default block.
+
+![case1](https://github.com/Shant1R/Shant_IIITB/assets/59409568/df44cbf2-60cf-4b2e-83b4-e9a8d75f8544)
+
+- Another point to take note of --> avoid partial assignments, else this might cause inferred latch formations.
+- Example to show the condtion of partial assignments.
+
+```bash
+reg [1:0] sel;
+always @(*)
+ begin
+   case(sel)
+     2'b00: begin
+             x=a;
+             y=b;
+            end
+     2'b01: begin
+             x=c;
+            end 
+     default: begin
+               x=d;
+               y=b;
+             end
+   endcase
+  end
+```
+- The hardware design for the given RTL file.
+
+ ![case2](https://github.com/Shant1R/Shant_IIITB/assets/59409568/d9e110da-5117-43f1-9451-c8eaf04583fb)
+
+- To avoid this it is important we assign all the variables in all the given cases and default case and also avoid overlapping cases.
+
+ 
 </details>
-
-
-<details>
-  <summary>
-    RV-D5SK2 - Solution to Pipeline Hazard
-  </summary>
-
-
-## RV-D5SK2 - L1 - Register File Bypass to address RD after WR hazard
-## RV-D5SK2 - L2 - Braches to correct branch target path
-## RV-D5SK2 - L3 - Complete instuction decode 
-## RV-D5SK2 - L4 - Code complete ALU
-</details>
-
-<details>
-  <summary>
-    RV-D5SK3 - Load Store Instruction and completing RISCV CPU
-  </summary>
-
-## RV-D5SK3 - L1 - Introduction and Lab to redirect load
-## RV-D5SK3 - L2 - Load data from Memory to Rgister file
-## RV-D5SK3 - L3 - Add loads and stores to test program
-## RV-D5SK3 - L4 - Add control logic for JUMP instructions
-## RV-D5SK3 - L5 - Wrap up 
-
-
-
