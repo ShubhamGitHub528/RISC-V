@@ -593,6 +593,8 @@ Under this section, we will look into how to add the load and store data from re
 
   
 ## References
+
+- https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf
 - https://github.com/kunalg123
 - https://github.com/stevehoover/RISC-V_MYTH_Workshop
 - https://www.vsdiat.com/
